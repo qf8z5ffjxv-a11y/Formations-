@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formations by Perry Denton</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    header {
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+      color: #00111a;
+    }
+    #stage {
+      margin: 16px;
+      height: 65vh;
+      background: #0b1023;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      position: relative;
+      overflow: hidden;
+    }
+    .dot {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #60a5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: bold;
+      user-select: none;
+      touch-action: none;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+<header>Formations by Perry Denton</header>
+
+<div id="stage"></div>
+
+<footer>Tap to add. Drag to move. Offline friendly.</footer>
+
+<script>
+  const stage = document.getElementById("stage");
+
+  stage.addEventListener("click", (e) => {
+    const rect = stage.getBoundingClientRect();
+    const dot = document.createElement("div");
+    dot.className = "dot";
+    dot.style.left = e.clientX - rect.left - 18 + "px";
+    dot.style.top = e.clientY - rect.top - 18 + "px";
+    dot.textContent = "•";
+    stage.appendChild(dot);
+
+    let dragging = false;
+
+    dot.addEventListener("pointerdown", () => dragging = true);
+    stage.addEventListener("pointerup", () => dragging = false);
+    stage.addEventListener("pointermove", (ev) => {
+      if (!dragging) return;
+      dot.style.left = ev.clientX - rect.left - 18 + "px";
+      dot.style.top = ev.clientY - rect.top - 18 + "px";
+    });
+  });
+</script>
+
+</body>
+</html>
